@@ -1,0 +1,36 @@
+:root {
+    --cell-size: 60px;
+    --width: 7;
+}
+
+#page {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: burlywood;
+    display: grid;
+    place-content: center;
+    grid-template-columns: repeat(var(--width), auto);
+}
+
+.cell {
+    background-color: white;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    cursor: not-allowed;
+}
+
+.red {
+    background-color: rgba(255, 0, 0, 0.719);
+}
+
+.green {
+    background-color: rgba(0, 128, 0, 0.76);
+    cursor: pointer;
+}
+
+.blue {
+    background-color: rgba(0, 0, 255, 0.705);
+}
