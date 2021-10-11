@@ -1,5 +1,5 @@
-var width = 9
-var height = 9
+var width = 13
+var height = 13
 var allCells;
 var leftTurn = true
 const board = document.getElementById("board")
@@ -51,7 +51,7 @@ function startGame() {
             })
             allCells[i][j].addEventListener("click", function() {
                 handleClick(this, i, j)
-            }, { once: true })
+            })
             board.appendChild(allCells[i][j])
         }
     }
@@ -73,16 +73,12 @@ function handleClick(e, i, j) {
         if (j < width - 1) {
             allCells[i][j + 1].classList.remove("green", "red", "blue", "hover")
         }
-    } else if (e.classList.contains("red")) {
-        if (leftTurn) {
-            e.classList.remove("green", "red", "blue", "hover")
-        }
+    } else if (e.classList.contains("red") && leftTurn) {
+        e.classList.remove("green", "red", "blue", "hover")
 
-    } else if (e.classList.contains("blue")) {
-        if (!leftTurn) {
-            console.log("here")
-            e.classList.remove("green", "red", "blue", "hover")
-        }
+    } else if (e.classList.contains("blue") && !leftTurn) {
+        console.log("here")
+        e.classList.remove("green", "red", "blue", "hover")
     } else {
         return
     }
