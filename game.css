@@ -10,6 +10,16 @@
     top: 0;
     bottom: 0;
     background-color: burlywood;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+#board {
+    border: solid 10px #75533a;
+    margin: auto;
+    width: fit-content;
+    background-color: white;
     display: grid;
     place-content: center;
     grid-template-columns: repeat(var(--width), auto);
@@ -23,14 +33,19 @@
 }
 
 .red {
-    background-color: rgba(255, 0, 0, 0.719);
+    background-color: rgba(255, 0, 0, 0.8);
 }
 
 .green {
-    background-color: rgba(0, 128, 0, 0.76);
+    background-color: rgba(0, 128, 0, 0.8);
     cursor: pointer;
 }
 
 .blue {
-    background-color: rgba(0, 0, 255, 0.705);
+    background-color: rgba(0, 0, 255, 0.8);
+}
+
+.hover {
+    cursor: pointer;
+    opacity: 0.3;
 }
