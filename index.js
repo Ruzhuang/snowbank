@@ -4,9 +4,50 @@ var allCells;
 var leftTurn = true
 const board = document.getElementById("board")
 
-startGame()
+document.getElementById("9").addEventListener("click", choose_9)
+
+function choose_9() {
+    width = 9
+    height = 9
+    startGame()
+}
+
+document.getElementById("11").addEventListener("click", choose_11)
+
+function choose_11() {
+    width = 11
+    height = 11
+    startGame()
+}
+
+document.getElementById("13").addEventListener("click", choose_13)
+
+function choose_13() {
+    width = 13
+    height = 13
+    startGame()
+}
+
+document.getElementById("15").addEventListener("click", choose_15)
+
+function choose_15() {
+    width = 15
+    height = 15
+    startGame()
+}
+
+document.getElementById("17").addEventListener("click", choose_17)
+
+function choose_17() {
+    width = 17
+    height = 17
+    startGame()
+}
+
+
 
 function startGame() {
+    board.innerHTML = ""
     var window_width = window.screen.width;
     var window_height = window.screen.height;
     // height = Number(document.getElementById("height").value)
@@ -55,6 +96,7 @@ function startGame() {
             board.appendChild(allCells[i][j])
         }
     }
+    document.getElementById("choose").classList.add("disappear")
 }
 
 function handleClick(e, i, j) {
@@ -97,12 +139,19 @@ function checkWins() {
             }
         }
     }
+    var win = document.createElement("span")
+    var restart = document.createElement("button")
+    restart.appendChild(document.createTextNode("Restart"))
+    restart.addEventListener("click", function() {
+        document.getElementById("choose").classList.remove("disappear")
+    })
+    board.appendChild(win)
     if (leftTurn) {
-        board.innerHTML = "Left Wins!"
+        win.innerHTML = "Left Wins!"
     } else {
-        board.innerHTML = "Right Wins!"
-
+        win.innerHTML = "Right Wins!"
     }
+    win.appendChild(restart)
 }
 
 function handleOver(e, i, j) {
