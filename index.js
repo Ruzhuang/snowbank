@@ -1,8 +1,63 @@
+/*
+Instruction page
+*/
+
+const instructions = document.getElementById("instruction-page")
+document.getElementById("instruction-start").addEventListener("click", function() {
+    instructions.style.display = "none"
+})
+if (localStorage.getItem("skip") == "true") {
+    instructions.style.display = "none"
+    document.getElementById("check").style.backgroundColor = "#75533ad2"
+}
+document.getElementById("instruction-do-not-show").addEventListener("click", function() {
+    if (localStorage.getItem("skip") == "true") {
+        localStorage.setItem("skip", "false")
+        document.getElementById("check").style.backgroundColor = "#d8bda9"
+    } else {
+        localStorage.setItem("skip", "true")
+        document.getElementById("check").style.backgroundColor = "#75533ad2"
+    }
+})
+document.getElementById("skip").addEventListener("click", function() {
+    instructions.style.display = "none"
+})
+let img;
+for (let i = 1; i < 7; i++) {
+    img = document.getElementById("img" + i);
+    if (img.complete) {
+        document.getElementById("loader" + i).style.display = "none"
+    } else {
+        document.getElementById("img" + i).addEventListener("load", function() {
+            document.getElementById("loader" + i).style.display = "none"
+        })
+    }
+}
+
+/*
+game page
+ */
 var width = 13
 var height = 13
 var allCells;
 var leftTurn = true
 const board = document.getElementById("board")
+const choose = document.getElementById("choose")
+const left = document.getElementById("left")
+const right = document.getElementById("right")
+document.getElementById("menu-restart").addEventListener("click", restart);
+
+function restart() {
+    board.innerHTML = ""
+    board.appendChild(choose)
+    left.style.backgroundColor = "#75533a"
+    right.style.backgroundColor = "#75533a"
+}
+
+document.getElementById("instructions").addEventListener("click", function() {
+    instructions.style.display = "initial"
+})
+
 
 document.getElementById("9").addEventListener("click", choose_9)
 
@@ -47,23 +102,23 @@ function choose_17() {
 
 
 function startGame() {
-    board.innerHTML = ""
     var window_width = window.screen.width;
     var window_height = window.screen.height;
     // height = Number(document.getElementById("height").value)
     // width = Number(document.getElementById("width").value)
     document.documentElement.style.setProperty('--width', width)
-    if (window_height / height < window_width / width) {
-        document.documentElement.style.setProperty('--cell-size', ((1 - 0.25) / height) * 100 + "vh")
-        if (window_width < 550) {
-            document.documentElement.style.setProperty('--cell-size', ((1 - 0.4) / height) * 100 + "vh")
+        // if (window_height / height < window_width / width) {
+        //     document.documentElement.style.setProperty('--cell-size', ((1 - 0.25) / height) * 100 + "vh")
+        //     if (window_width < 550) {
+        //         document.documentElement.style.setProperty('--cell-size', ((1 - 0.4) / height) * 100 + "vh")
 
-        }
-    } else {
-        document.documentElement.style.setProperty('--cell-size', ((1 - 0.25) / width) * 100 + "vw")
-    }
-
+    //     }
+    // } else {
+    //     document.documentElement.style.setProperty('--cell-size', ((1 - 0.25) / width) * 100 + "vw")
+    // }
+    document.documentElement.style.setProperty('--cell-size', (450 / width) + "px")
     leftTurn = true
+    left.style.backgroundColor = "transparent"
 
     allCells = new Array(height)
     for (let i = 0; i < height; i++) {
@@ -96,7 +151,7 @@ function startGame() {
             board.appendChild(allCells[i][j])
         }
     }
-    document.getElementById("choose").classList.add("disappear")
+    board.removeChild(choose)
 }
 
 function handleClick(e, i, j) {
@@ -115,10 +170,10 @@ function handleClick(e, i, j) {
         if (j < width - 1) {
             allCells[i][j + 1].classList.remove("green", "red", "blue", "hover")
         }
-    } else if (e.classList.contains("red") && leftTurn) {
+    } else if (e.classList.contains("red") && !leftTurn) {
         e.classList.remove("green", "red", "blue", "hover")
 
-    } else if (e.classList.contains("blue") && !leftTurn) {
+    } else if (e.classList.contains("blue") && leftTurn) {
         console.log("here")
         e.classList.remove("green", "red", "blue", "hover")
     } else {
@@ -126,6 +181,13 @@ function handleClick(e, i, j) {
     }
     checkWins()
     leftTurn = !leftTurn
+    if (leftTurn) {
+        left.style.backgroundColor = "transparent"
+        right.style.backgroundColor = "#75533a"
+    } else {
+        right.style.backgroundColor = "transparent"
+        left.style.backgroundColor = "#75533a"
+    }
 
 }
 
@@ -143,7 +205,10 @@ function checkWins() {
     var restart = document.createElement("button")
     restart.appendChild(document.createTextNode("Restart"))
     restart.addEventListener("click", function() {
-        document.getElementById("choose").classList.remove("disappear")
+        board.innerHTML = ""
+        board.appendChild(choose)
+        left.style.backgroundColor = "#75533a"
+        right.style.backgroundColor = "#75533a"
     })
     board.appendChild(win)
     if (leftTurn) {
@@ -169,12 +234,12 @@ function handleOver(e, i, j) {
         if (j < width - 1) {
             allCells[i][j + 1].classList.add("hover")
         }
-    } else if (e.classList.contains("red")) {
+    } else if (e.classList.contains("blue")) {
         if (leftTurn) {
             e.classList.add("hover")
         }
 
-    } else if (e.classList.contains("blue")) {
+    } else if (e.classList.contains("red")) {
         if (!leftTurn) {
             e.classList.add("hover")
         }

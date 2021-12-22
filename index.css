@@ -8,6 +8,156 @@ body {
     font-family: "Gill Sans", sans-serif;
 }
 
+
+/*
+Instruction page
+*/
+
+#instruction-page {
+    overflow-y: scroll;
+    color: #382414;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: burlywood;
+}
+
+#header {
+    z-index: 9999;
+    background-color: #75533a;
+    color: #F6BE00;
+    height: 70px;
+    top: 0;
+    position: sticky;
+    line-height: 70px;
+    font-size: xx-large;
+}
+
+#skip {
+    margin: 0;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    height: 50px;
+    width: 100px;
+}
+
+#instruction-page>p {
+    font-size: x-large;
+    text-align: start;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+#end {
+    background-color: #75533a;
+}
+
+#end>button {
+    margin-left: 30px;
+    height: 70px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#instruction-start {
+    width: 250px;
+}
+
+#instruction-do-not-show {
+    position: relative;
+    line-height: 70px;
+    width: 500px;
+}
+
+#check {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: 30px;
+    width: 30px;
+    border: solid 10px #d8bda9;
+    background-color: #d8bda9;
+}
+
+
+/*image and loader*/
+
+.img-wrapper {
+    position: relative;
+    overflow: hidden;
+    margin: auto;
+    height: 350px;
+    width: 530px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#img1 {
+    height: 350px;
+    width: 350px;
+}
+
+#img3 {
+    height: 350px;
+    width: 350px;
+}
+
+img {
+    height: 350px;
+    width: 530px;
+}
+
+.loader {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #75533ad2;
+}
+
+.loader>p {
+    font-size: 40px;
+    margin: 10px;
+}
+
+.spin {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, .3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+
+/*
+Game page
+*/
+
 #page {
     position: absolute;
     left: 0;
@@ -17,7 +167,47 @@ body {
     background-color: transparent;
     text-align: center;
     display: flex;
+    flex-direction: row;
     justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+#menu {
+    border: solid 10px #75533a;
+    height: 450px;
+    width: 200px;
+    flex-shrink: 0;
+    background-color: #75533a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#turn {
+    color: #75533a;
+    font-size: 50px;
+    width: 95%;
+    background-color: #F6BE00;
+    height: 70%;
+}
+
+#left {
+    transition: background-color 0.2s linear;
+    background-color: #75533a;
+    height: 50%;
+}
+
+#right {
+    transition: background-color 0.5s linear;
+    height: 50%;
+    background-color: #75533a;
+}
+
+#menu>button {
+    width: 95%;
+    margin-top: 5%;
 }
 
 #choose {
@@ -25,42 +215,36 @@ body {
     flex-direction: column;
     text-align: center;
     justify-content: center;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background-color: burlywood;
+    width: 450px;
+    height: 450px;
+    background-color: #75533a;
 }
 
 #first-row {
-    color: #351804;
+    color: #F6BE00;
     margin-bottom: 10vh;
-    font-size: 50px;
+    font-size: 30px;
     margin-left: 20px;
     margin-right: 20px;
 }
 
-@media only screen and (max-width: 600px) {
+
+/* @media only screen and (max-width: 600px) {
     #first-row {
         font-size: 30px;
     }
-}
+} */
 
 #second-row>button {
     width: 130px;
     height: 130px;
     margin: 5px;
-    background-color: #75533a;
     border: none;
     font-size: 25px;
-    color: #ddc5b2;
 }
 
 #second-row>button:hover {
     cursor: pointer;
-    background-color: #75533a7a;
-    color: #75533a;
 }
 
 #choose.disappear {
@@ -68,9 +252,8 @@ body {
 }
 
 #board {
-    position: relative;
     border: solid 10px #75533a;
-    margin: auto;
+    margin-right: 30px;
     width: fit-content;
     background-color: white;
     display: grid;
@@ -80,10 +263,8 @@ body {
 
 span {
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    width: 450px;
+    height: 450px;
     background-color: #75533a;
     display: flex;
     flex-direction: column;
@@ -93,7 +274,7 @@ span {
     color: #F6BE00;
 }
 
-span>button {
+button {
     border: none;
     height: 15%;
     margin-top: 15%;
@@ -104,13 +285,14 @@ span>button {
     font-size: x-large;
 }
 
-span>button:hover {
+button:hover {
     background-color: #d8bda9;
     cursor: pointer;
     color: #75533a;
 }
 
 .cell {
+    transition: background-color 0.2s linear;
     background-color: white;
     width: var(--cell-size);
     height: var(--cell-size);

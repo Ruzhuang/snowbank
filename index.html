@@ -13,16 +13,30 @@
 <body>
     <div id="page">
         <div id="board">
-        </div>
-        <div id="choose">
-            <div id="first-row">Dimension of the grid:</div>
-            <div id="second-row">
-                <button id="9">9x9</button>
-                <button id="11">11x11</button>
-                <button id="13">13x13</button>
-                <button id="15">15x15</button>
-                <button id="17">17x17</button>
+            <div id="choose">
+                <div id="first-row">Dimension of the board:</div>
+                <div id="second-row">
+                    <button id="9">9x9</button>
+                    <button id="11">11x11</button>
+                    <button id="13">13x13</button>
+                    <button id="15">15x15</button>
+                    <button id="17">17x17</button>
+                </div>
             </div>
+
+        </div>
+        <div id="menu">
+            <div id="turn">
+                <div id="left">
+                    Left's Turn
+                </div>
+                <div id="right">
+                    Right's Turn
+                </div>
+            </div>
+            <button id="menu-restart">Restart</button>
+            <button id="instructions">Instructions</button>
+            <button id="download">Download Game</button>
         </div>
         <!-- <div class="cell green"></div>
         <div class="cell red"></div>
@@ -79,6 +93,87 @@
         <div class="cell green"></div>
         <div class="cell red"></div>
         <div class="cell green"></div> -->
+
+        <div id="instruction-page">
+            <div id="header">Instructions
+                <button id="skip">skip</button>
+            </div>
+            <p style="text-align: center;">The game of Snowbank</p>
+            <p>&nbsp&nbsp&nbsp&nbsp The game of Snowbank is a two-person game where the starting position is a board with squares of color green, red, blue and white, organized in the way shown below. Green squares are always at the corners of the game board,
+                so a square board is always of odd dimension.
+                <br>&nbsp&nbsp&nbsp&nbsp The following 9x9 game board is used to illustrate the rules:
+            </p>
+            <div class="img-wrapper">
+                <img id="img1" src="images/board.png" alt="9 X 9 board">
+                <div class="loader" id="loader1">
+                    <p>Loading</p>
+                    <div class="spin"></div>
+                </div>
+            </div>
+            <p>&nbsp&nbsp&nbsp&nbspBefore the game starts, the size of the grid (height x width) must be selected by clicking one of the options: </p>
+            <div class="img-wrapper">
+                <img id="img2" src="images/set_grid.gif" alt="set grid page">
+                <div class="loader" id="loader2">
+                    <p>Loading</p>
+                    <div class="spin"></div>
+                </div>
+            </div>
+            <p>&nbsp&nbsp&nbsp&nbsp The board is empty at the beginning of the game. And two players, called <em id="blue">Left</em> and <em id="red">Right</em>, take turns in placing white tiles on the red, blue, and green squares. The white squares are
+                never played upon. Also, previously covered squares are never covered over.</p>
+            <p></p>
+            <p><strong>Neighbors:</strong></p>
+            <p>&nbsp&nbsp&nbsp&nbsp The “neighbors” of a green square are the <u>uncovered</u> red and blue squares that are immediately adjacent (to the green square). When one chooses to tile-over a green square, its uncovered neighbors must also be tiled-over
+                (as explained below).</p>
+            <p>&nbsp&nbsp&nbsp&nbsp Given an empty board as shown in the following figure, a green square in any corner “C” has 2 neighbors (see the upper left-hand corner); a green square on the side of the board “S” has 3 neighbors (see the lower edge);
+                and a green square in the middle of the board “M” has 4 neighbors. Neighboring squares are marked by “N”. </p>
+
+            <div class="img-wrapper">
+                <img id="img3" src="images/neighbors.png" alt="neighbors">
+                <div class="loader" id="loader3">
+                    <p>Loading</p>
+                    <div class="spin"></div>
+                </div>
+            </div>
+            <p><strong>Game Rules:</strong></p>
+            <p>&nbsp&nbsp&nbsp&nbsp After choosing the dimension by clicking one of the options, the game would start. Then, <em id="blue">Left</em> and <em id="red">Right</em> take turns placing the tiles as follows:</p>
+            <p>1. <em id="blue">Left</em> can place a single tile on any unoccupied <em id="blue">blue</em> square.</p>
+            <div class="img-wrapper">
+                <img id="img4" src="images/blue.gif" alt="Left cover single blue square">
+                <div class="loader" id="loader4">
+                    <p>Loading</p>
+                    <div class="spin"></div>
+                </div>
+            </div>
+            <p><em>Or</em> she can cover any unoccupied green square while covering all of the green square's unoccupied neighbors (See Rule 3).</p>
+            <div class="img-wrapper">
+                <img id="img5" src="images/green.gif" alt="Left cover green square">
+                <div class="loader" id="loader5">
+                    <p>Loading</p>
+                    <div class="spin"></div>
+                </div>
+            </div>
+            <p>Note that possible moves by <em id="blue">Left</em> are indicated by the pointer cursor sign when hover over, while the tile to be covered by that move are shown as whitened.</p>
+            <p>In contrast, the moves that <em id="blue">Left</em> can't make are indicated by the "not-allowed" cursor when hovered over.</p>
+            <div class="img-wrapper">
+                <img id="img6" src="images/not-allowed.gif" alt="Left's unallowed moves'">
+                <div class="loader" id="loader6">
+                    <p>Loading</p>
+                    <div class="spin"></div>
+                </div>
+            </div>
+            <p>The possible and impossible moves by <em id="red">Right</em> are indicated in the same way. </p>
+            <p>2. Likewise, <em id="red">Right</em> can place a single tile on any unoccupied <em id="red">red</em> square or he can cover any unoccupied green square. </p>
+            <p>3. The rule for covering green squares applies to both players. Namely, a tile must be chosen that covers the green square together with <u>all</u> of its unoccupied neighbors.</p>
+            <p>4. Single green squares whose blue and red neighbors become covered during the game are said to be “snowed-in”. By default, such squares can be covered by either player by using a single tile.</p>
+            <p>5. The winner of the game is the player who makes the last legal move. (If it is your turn and you cannot make a legal move, then you lose.)</p>
+            <div id="end">
+                <button id="instruction-start">Start Game</button>
+                <button id="instruction-do-not-show">
+                    <div id = "check">
+                    </div>
+                    Skip this instruction next time</button>
+            </div>
+        </div>
     </div>
 </body>
 
